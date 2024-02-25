@@ -1,3 +1,14 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "no-fallthrough": "warn",
+    "no-invalid-regexp": "warn",
+    "no-unreachable": "warn",
+    "no-unused-vars": "error",
+    "default-case": "error",
+    "no-empty-function": "error",
+    "no-var": "error",
+    "prefer-arrow-callback": "error",
+    "prefer-const": "error"
+  }
 }
