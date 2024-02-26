@@ -19,10 +19,11 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const bodyClassName = `${poppins.className} dark:bg-slate-800`;
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={poppins.variable}>{children}</body>
+        <body className={bodyClassName}>{children}</body>
       </html>
     </ClerkProvider>
   );

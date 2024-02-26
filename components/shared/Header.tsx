@@ -5,6 +5,7 @@ import { Button } from '../ui/button';
 
 import MobileNav from './MobileNav';
 import NavItems from './NavItems';
+import ThemeSwitcher from './ThemeSwitcher';
 
 const Header = () => {
   return (
@@ -20,13 +21,14 @@ const Header = () => {
           </nav>
         </SignedIn>
 
-        <div className="flex w-32 justify-end gap-3">
+        <div className="flex w-40 justify-end gap-3">
+          <ThemeSwitcher />
           <SignedIn>
             <UserButton afterSignOutUrl="/" />
             <MobileNav />
           </SignedIn>
           <SignedOut>
-            <Button asChild className="rounded-full" size="lg">
+            <Button asChild className="rounded-full dark:bg-white" size="lg">
               <Link href="/sign-in">Login</Link>
             </Button>
           </SignedOut>
