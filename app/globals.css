@@ -33,6 +33,8 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+
+    --link-color: 227 87.5% 50.0%;
   }
 
   .dark {
@@ -63,6 +65,8 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
+    --link-color: 187.94 85.71% 53.33%;
   }
 }
 
@@ -75,11 +79,21 @@
 
 body {
   font-family: var(--font-poppins);
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--secondary));
 }
 
 .filter-grey {
   filter: brightness(0) saturate(100%) invert(47%) sepia(0%) saturate(217%) hue-rotate(32deg) brightness(98%)
     contrast(92%);
+}
+
+.nav-link {
+  color: hsl(var(--secondary-foreground));
+}
+
+.nav-link:hover, .nav-link:focus-within, .nav-link.active {
+  color: hsl(var(--link-color));
 }
 
 /* ========================================== TAILWIND STYLES */

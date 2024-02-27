@@ -4,26 +4,18 @@ import { useEffect, useState } from 'react';
 
 const DARK_MODE_LOCAL_STORAGE_KEY = 'next-event-dark-theme';
 
-const getDarkModeFromLocalStorage = () => {
-  return !!localStorage.getItem(DARK_MODE_LOCAL_STORAGE_KEY);
-};
-
-const setDarkModeToLocalStorage = (isDarkMode: boolean) => {
-  localStorage.setItem(DARK_MODE_LOCAL_STORAGE_KEY, String(isDarkMode));
-};
-
 function ThemeSwitcher() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleDarkMode = () => {
     const newValue = !isDarkMode;
     setIsDarkMode(newValue);
-    setDarkModeToLocalStorage(newValue);
+    localStorage.setItem(DARK_MODE_LOCAL_STORAGE_KEY, String(newValue));
     document.documentElement.classList.toggle('dark', newValue);
   };
 
   useEffect(() => {
-    if (getDarkModeFromLocalStorage()) {
+    if (localStorage.getItem(DARK_MODE_LOCAL_STORAGE_KEY) == 'true') {
       setIsDarkMode(true);
       document.documentElement.classList.add('dark');
     }
