@@ -52,13 +52,14 @@ export async function POST(req: Request) {
   if (eventType === 'user.created') {
     const { id, email_addresses, image_url, first_name, last_name, username } = evt.data;
     const email = email_addresses[0].email_address;
+    const fallBackName = email.split('@')[0];
 
     const user = {
       clerkId: id,
       email: email,
-      username: username || email.split('@')[0],
-      firstName: first_name || '',
-      lastName: last_name || '',
+      username: username || fallBackName,
+      firstName: first_name || fallBackName,
+      lastName: last_name || fallBackName,
       photo: image_url,
     };
 
