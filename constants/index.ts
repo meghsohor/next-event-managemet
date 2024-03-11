@@ -1,3 +1,5 @@
+import { eventFormSchema } from "@/lib/event-form.validator";
+
 export const headerLinks = [
   {
     label: 'Home',
@@ -13,13 +15,13 @@ export const headerLinks = [
   },
 ];
 
-export const eventDefaultValues = {
+export const eventDefaultValues: typeof eventFormSchema._type = {
   title: '',
   description: '',
   location: '',
   imageUrl: '',
   startDateTime: new Date(),
-  endDateTime: new Date(),
+  endDateTime: new Date(Date.now() + (1000 * 60 * 60)),
   categoryId: '',
   price: '',
   isFree: false,

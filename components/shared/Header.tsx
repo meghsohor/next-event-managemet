@@ -21,7 +21,7 @@ const Header = () => {
           </nav>
         </SignedIn>
 
-        <div className="flex w-40 justify-end gap-3">
+        <div className="flex w-40 items-center justify-end gap-3">
           <ThemeSwitcher />
           <SignedIn>
             <UserButton afterSignOutUrl="/" />

@@ -5,10 +5,11 @@ import NavItems from './NavItems';
 import Menu from '../icons/Menu';
 
 const MobileNav = () => {
+  
   return (
     <nav className="md:hidden">
-      <Sheet>
-        <SheetTrigger className="align-middle">
+      <Sheet modal open={false}>
+        <SheetTrigger  className="align-middle">
           <Menu className="cursor-pointer" />
         </SheetTrigger>
         <SheetContent className="flex flex-col gap-6 bg-white dark:bg-slate-700 md:hidden">
