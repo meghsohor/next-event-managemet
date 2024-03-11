@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from 'next/image';
 import heroImage from '@/public/assets/images/hero.png';
+import Search from "@/components/shared/Search";
 
 
 export default function Home() {
@@ -36,7 +37,7 @@ export default function Home() {
         </h2>
 
         <div className="flex w-full flex-col gap-5 md:flex-row">
-          {/* <Search /> */}
+          <Search />
           {/* <CategoryFilter /> */}
         </div>
 
