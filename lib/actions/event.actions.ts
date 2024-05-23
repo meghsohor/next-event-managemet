@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 
 import { connectToDatabase } from '@/lib/database';
-import Event from '@/lib/database/models/event.model';
+import Event, { IEvent } from '@/lib/database/models/event.model';
 import User from '@/lib/database/models/user.model';
 import Category from '@/lib/database/models/category.model';
 import { handleError } from '@/lib/utils';
@@ -107,11 +107,12 @@ export async function getAllEvents({ query, limit = 6, page, category }: GetAllE
     const eventsCount = await Event.countDocuments(conditions);
 
     return {
-      data: JSON.parse(JSON.stringify(events)),
+      data: JSON.parse(JSON.stringify(events)) as IEvent[],
       totalPages: Math.ceil(eventsCount / limit),
     };
   } catch (error) {
     handleError(error);
+    return { data: [] as IEvent[], totalPages: 0 };
   }
 }
 
