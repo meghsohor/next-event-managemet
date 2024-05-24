@@ -14,7 +14,7 @@ export default async function Home() {
     query: '',
     category: '',
   });
-  console.log(events);
+  //console.log(events);
   return (
     <>
       <section className="bg-dotted-pattern bg-contain py-5 md:py-10">
