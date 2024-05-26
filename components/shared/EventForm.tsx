@@ -38,6 +38,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
           ...event,
           startDateTime: new Date(event.startDateTime),
           endDateTime: new Date(event.endDateTime),
+          categoryId: event.category._id.toString(),
         }
       : eventDefaultValues;
 
@@ -106,6 +107,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
       }
     }
   }
+
 
   return (
     <Form {...eventForm}>
@@ -315,7 +317,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
         <Button
           type="submit"
           size="lg"
-          disabled={eventForm.formState.isSubmitting}
+          disabled={eventForm.formState.isSubmitting || !eventForm.formState.isValid || !eventForm.formState.isDirty}
           className="button col-span-2 w-full max-w-sm self-center"
         >
           {eventForm.formState.isSubmitting ? 'Submitting...' : `${type} Event `}

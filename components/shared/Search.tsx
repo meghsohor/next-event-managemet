@@ -6,7 +6,7 @@ import { Input } from '../ui/input';
 import { formUrlQuery, removeKeysFromQuery } from '@/lib/utils';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-const Search = ({ placeholder = 'Search title...' }: { placeholder?: string }) => {
+const Search = ({ placeholder = 'Search event by title' }: { placeholder?: string }) => {
   const [query, setQuery] = useState('');
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -14,7 +14,6 @@ const Search = ({ placeholder = 'Search title...' }: { placeholder?: string }) =
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       let newUrl = '';
-
       if (query) {
         newUrl = formUrlQuery({
           params: searchParams.toString(),
