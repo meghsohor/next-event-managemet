@@ -27,7 +27,7 @@ const populateEvent = (query: any) => {
     .populate({ path: 'category', model: Category, select: '_id name' });
 };
 
-export async function createEvent({ userId, event, path }: CreateEventParams) {
+export async function createEvent({ userId, event, path }: CreateEventParams): Promise<IEvent> {
   try {
     await connectToDatabase();
 
@@ -43,7 +43,7 @@ export async function createEvent({ userId, event, path }: CreateEventParams) {
   }
 }
 
-export async function getEventById(eventId: string) {
+export async function getEventById(eventId: string): Promise<IEvent> {
   try {
     await connectToDatabase();
 
@@ -53,11 +53,11 @@ export async function getEventById(eventId: string) {
 
     return JSON.parse(JSON.stringify(event));
   } catch (error) {
-    handleError(error);
+    return handleError(error);
   }
 }
 
-export async function updateEvent({ userId, event, path }: UpdateEventParams) {
+export async function updateEvent({ userId, event, path }: UpdateEventParams): Promise<IEvent> {
   try {
     await connectToDatabase();
 
@@ -75,7 +75,7 @@ export async function updateEvent({ userId, event, path }: UpdateEventParams) {
 
     return JSON.parse(JSON.stringify(updatedEvent));
   } catch (error) {
-    handleError(error);
+    return handleError(error);
   }
 }
 
@@ -90,7 +90,12 @@ export async function deleteEvent({ eventId, path }: DeleteEventParams) {
   }
 }
 
-export async function getAllEvents({ query, limit = 6, page, category }: GetAllEventsParams) {
+export async function getAllEvents({
+  query,
+  limit = 6,
+  page,
+  category,
+}: GetAllEventsParams): Promise<{ data: IEvent[]; totalPages: number }> {
   try {
     await connectToDatabase();
 
@@ -107,16 +112,20 @@ export async function getAllEvents({ query, limit = 6, page, category }: GetAllE
     const eventsCount = await Event.countDocuments(conditions);
 
     return {
-      data: JSON.parse(JSON.stringify(events)) as IEvent[],
+      data: JSON.parse(JSON.stringify(events)),
       totalPages: Math.ceil(eventsCount / limit),
     };
   } catch (error) {
     handleError(error);
-    return { data: [] as IEvent[], totalPages: 0 };
+    return { data: [], totalPages: 0 };
   }
 }
 
-export async function getEventsByUser({ userId, limit = 6, page }: GetEventsByUserParams) {
+export async function getEventsByUser({
+  userId,
+  limit = 6,
+  page,
+}: GetEventsByUserParams): Promise<{ data: IEvent[]; totalPages: number }> {
   try {
     await connectToDatabase();
 
@@ -131,6 +140,7 @@ export async function getEventsByUser({ userId, limit = 6, page }: GetEventsByUs
     return { data: JSON.parse(JSON.stringify(events)), totalPages: Math.ceil(eventsCount / limit) };
   } catch (error) {
     handleError(error);
+    return { data: [], totalPages: 0 };
   }
 }
 
@@ -139,7 +149,7 @@ export async function getRelatedEventsByCategory({
   eventId,
   limit = 3,
   page = 1,
-}: GetRelatedEventsByCategoryParams) {
+}: GetRelatedEventsByCategoryParams): Promise<{data: IEvent[]; totalPages: number}> {
   try {
     await connectToDatabase();
 
@@ -154,5 +164,6 @@ export async function getRelatedEventsByCategory({
     return { data: JSON.parse(JSON.stringify(events)), totalPages: Math.ceil(eventsCount / limit) };
   } catch (error) {
     handleError(error);
+    return { data: [], totalPages: 0 };
   }
 }
